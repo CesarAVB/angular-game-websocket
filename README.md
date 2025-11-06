@@ -11,13 +11,6 @@ Um jogo multiplayer de Pedra, Papel e Tesoura em tempo real. Você joga contra o
 - Mostra o resultado da partida em tempo real
 - Mantém você informado sobre o status da conexão
 
-## Problemas que resolve
-
-- Permite jogar Pedra, Papel e Tesoura com outra pessoa remotamente
-- Elimina a necessidade de estar no mesmo local físico
-- Fornece resultado instantâneo sem manipulação
-- Não precisa de cadastro ou login
-
 **Backend (não incluído neste repositório):**
 - Spring Boot
 - WebSocket
