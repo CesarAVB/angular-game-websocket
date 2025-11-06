@@ -1,0 +1,25 @@
+footer {
+  background-color: #333; /* Cor de fundo escura */
+  color: #fff; /* Texto branco */
+  padding: 20px; /* Espaçamento interno */
+  text-align: center; /* Centraliza o texto */
+  font-size: 0.9em; /* Tamanho da fonte um pouco menor */
+  margin-top: auto; /* Empurra o footer para baixo em um flex container */
+  width: 100%; /* Ocupa toda a largura */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+footer p {
+  margin: 5px 0; /* Espaçamento entre parágrafos */
+}
+
+.social-links a {
+  color: #fff; /* Links brancos */
+  text-decoration: none; /* Remove sublinhado */
+  margin: 0 10px; /* Espaçamento entre os links */
+  transition: color 0.3s ease; /* Transição suave para o hover */
+}
+
+.social-links a:hover {
+  color: #007bff; /* Cor azul no hover */
+}

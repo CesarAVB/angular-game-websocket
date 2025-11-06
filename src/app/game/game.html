@@ -1,0 +1,41 @@
+<div class="game-container">
+  <h1>Pedra, Papel e Tesoura</h1>
+
+  <div *ngIf="!isConnected" class="connection-status disconnected">
+    Não conectado ao servidor WebSocket.
+  </div>
+  <div *ngIf="isConnected" class="connection-status connected">
+    Conectado ao servidor.
+  </div>
+
+  <div class="choices">
+    <!-- Botões desabilitados se não estiver conectado OU se estiver aguardando oponente -->
+    <button (click)="makeChoice('PEDRA')" [disabled]="!isConnected || waitingForOpponent">
+      <img src="../../assets/rock.png" alt="Pedra"> Pedra
+    </button>
+    <button (click)="makeChoice('PAPEL')" [disabled]="!isConnected || waitingForOpponent">
+      <img src="../../assets/paper.png" alt="Papel"> Papel
+    </button>
+    <button (click)="makeChoice('TESOURA')" [disabled]="!isConnected || waitingForOpponent">
+      <img src="../../assets/scissors.png" alt="Tesoura"> Tesoura
+    </button>
+  </div>
+
+  <div *ngIf="playerChoice" class="player-info">
+    <p>Sua escolha: <strong>{{ playerChoice | titlecase }}</strong></p>
+  </div>
+
+  <!-- O backend não envia a escolha do oponente separadamente, então este bloco pode não ser útil -->
+  <!-- <div *ngIf="opponentChoice" class="opponent-info">
+    <p>Escolha do oponente: <strong>{{ opponentChoice | titlecase }}</strong></p>
+  </div> -->
+
+  <div *ngIf="gameResult" class="game-result">
+    <h2 [innerHTML]="gameResult"></h2> <!-- Use [innerHTML] aqui -->
+  </div>
+
+  <div class="instructions">
+    <p *ngIf="isConnected && !waitingForOpponent">Clique em uma opção para jogar!</p>
+    <p *ngIf="waitingForOpponent">Aguardando a jogada do oponente ou outro jogador...</p>
+  </div>
+</div>

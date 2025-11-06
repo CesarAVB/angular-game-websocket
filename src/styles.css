@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+  html, body {
+  height: 100%; /* Garante que html e body ocupem 100% da altura da viewport */
+  margin: 0;
+  font-family: Arial, sans-serif; /* Uma fonte padrão */
+}
+
+app-root {
+  display: flex; /* Transforma o app-root em um container flex */
+  flex-direction: column; /* Organiza os itens em coluna */
+  min-height: 100vh; /* Garante que o app-root ocupe no mínimo 100% da altura da viewport */
+}
+
+main {
+  flex-grow: 1; /* Faz com que o conteúdo principal ocupe todo o espaço disponível */
+  /* Adicione padding ou margin se necessário para o conteúdo não colar nas bordas */
+}
