@@ -9,7 +9,7 @@ export class WebsocketService {
   private messageSubject: Subject<any> = new Subject<any>();
   public messages$: Observable<any> = this.messageSubject.asObservable();
 
-  private readonly WS_URL = 'ws://localhost:8080/game';
+  private readonly WS_URL = 'ws://jokenpo.cesaravb.com.br/game';
 
   constructor() { }
 
