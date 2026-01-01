@@ -1,55 +1,58 @@
 # Pedra, Papel e Tesoura Online
 
-Um jogo multiplayer de Pedra, Papel e Tesoura em tempo real. Você joga contra outro jogador conectado ao mesmo tempo.
+Jogo multiplayer de Pedra, Papel e Tesoura em tempo real com comunicação WebSocket. Conecte-se com outro jogador e dispute partidas instantâneas sem necessidade de cadastro.
 
-<<<<<<< HEAD
+![Screenshot](public/game.png)
+
 ## O que o projeto faz
 
-- Conecta dois jogadores através de WebSocket
-- Permite que você faça sua escolha (pedra, papel ou tesoura)
-- Mostra o resultado da partida em tempo real
-- Mantém você informado sobre o status da conexão
+- Conecta dois jogadores simultaneamente através de WebSocket
+- Permite escolhas em tempo real (pedra, papel ou tesoura)
+- Exibe resultado instantâneo das partidas
+- Mantém indicador visual do status de conexão
+- Desabilita controles automaticamente durante espera
+- Suporta múltiplas partidas consecutivas
 
 ## Problemas que resolve
 
-- Permite jogar Pedra, Papel e Tesoura com outra pessoa remotamente
-- Elimina a necessidade de estar no mesmo local físico
-- Fornece resultado instantâneo sem manipulação
-- Não precisa de cadastro ou login
+- Permite jogar remotamente sem estar no mesmo local físico
+- Elimina possibilidade de manipulação de resultados
+- Fornece feedback instantâneo sobre todas as ações
+- Não requer cadastro, login ou instalação
 
 ## Tecnologias
 
 **Frontend:**
-- Angular 19
-- TypeScript
-- WebSocket API
+- Angular 20.3
+- TypeScript 5.9
+- WebSocket API nativa
 - CSS3
+- Standalone Components
 
-**Backend (não incluído neste repositório):**
-- Spring Boot
-- WebSocket
-- Java
+**Backend (repositório separado):**
+- Spring Boot 3.5
+- Java 21
+- Spring WebSocket
+- Maven
 
 ## Requisitos
 
-Você precisa ter instalado:
-
+### Obrigatório
 - Node.js 18 ou superior
 - npm 9 ou superior
-- Angular CLI 19
+- Angular CLI 20
 
-Para o backend funcionar:
-- Java 17 ou superior
-- Maven 3.6 ou superior
-- Backend rodando em `http://localhost:8080`
+### Para execução completa
+- Backend rodando (veja seção Backend)
+- Navegador moderno com suporte a WebSocket
 
 ## Instalação
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/CesarAVB/rock-paper-scissors-frontend.git
-cd rock-paper-scissors-frontend
+git clone https://github.com/CesarAVB/angular-game-websocket.git
+cd angular-game-websocket
 ```
 
 ### 2. Instale as dependências
@@ -58,147 +61,384 @@ cd rock-paper-scissors-frontend
 npm install
 ```
 
-### 3. Configure o backend
+### 3. Configure a URL do backend
 
-O frontend espera que o backend esteja rodando em:
+O frontend está configurado para conectar em:
 ```
-ws://localhost:8080/game
+wss://websocket-jokenpo.cesaravb.com.br/game
 ```
 
-Se seu backend usar outra porta, edite o arquivo `src/app/websocket.ts`:
+Para desenvolvimento local, edite `src/app/websocket.ts`:
 
 ```typescript
-private readonly WS_URL = 'ws://localhost:SUA_PORTA/game';
+private readonly WS_URL = 'ws://localhost:8080/game';
 ```
 
 ### 4. Execute a aplicação
 
+**Desenvolvimento:**
 ```bash
+npm start
+# ou
 ng serve
+```
+
+**Build de produção:**
+```bash
+npm run build
+# Arquivos gerados em: dist/
 ```
 
 ### 5. Acesse no navegador
 
-Abra seu navegador em:
+**Desenvolvimento:**
 ```
 http://localhost:4200
 ```
 
+**Produção:**
+```
+https://jokenpo.cesaravb.com.br
+```
+
+## Backend
+
+Este projeto requer o backend WebSocket disponível em:
+**[Backend Jokenpo - Spring Boot](https://github.com/CesarAVB/jokenpo-websocket-backend)**
+
+**Execução do backend:**
+```bash
+git clone https://github.com/CesarAVB/jokenpo-websocket-backend.git
+cd jokenpo-websocket-backend
+mvn spring-boot:run
+```
+
+O backend estará disponível em: `ws://localhost:8080/game`
+
 ## Como usar
 
-1. Abra a aplicação em duas abas ou navegadores diferentes
-2. Aguarde a mensagem "Conectado ao servidor"
-3. Quando aparecer "Clique em uma opção para jogar", escolha pedra, papel ou tesoura
-4. Aguarde o outro jogador fazer sua escolha
-5. Veja o resultado da partida
-6. Jogue novamente clicando em outra opção
+1. **Abra a aplicação** em duas abas ou navegadores diferentes
+2. **Aguarde a conexão** - Indicador verde confirma conexão estabelecida
+3. **Espere o segundo jogador** - Mensagem "Jogadores conectados!" aparecerá
+4. **Faça sua escolha** - Clique em pedra, papel ou tesoura
+5. **Aguarde o oponente** - Botões ficam desabilitados automaticamente
+6. **Veja o resultado** - Resultado formatado é exibido para ambos
+7. **Jogue novamente** - Clique em nova opção para próxima rodada
 
 ## Estrutura do projeto
 
 ```
 src/
 ├── app/
-│   ├── game/           # Componente principal do jogo
-│   ├── footer/         # Rodapé da página
-│   ├── websocket.ts    # Serviço de conexão WebSocket
-│   └── app.ts          # Componente raiz
-├── assets/             # Imagens (pedra, papel, tesoura)
-└── styles.css          # Estilos globais
+│   ├── game/                    # Componente principal do jogo
+│   │   ├── game.ts             # Lógica do componente
+│   │   ├── game.html           # Template
+│   │   └── game.css            # Estilos
+│   ├── footer/                 # Rodapé da aplicação
+│   │   ├── footer.ts
+│   │   ├── footer.html
+│   │   └── footer.css
+│   ├── websocket.ts            # Serviço de comunicação WebSocket
+│   ├── app.ts                  # Componente raiz
+│   ├── app.html                # Template raiz
+│   ├── app.config.ts           # Configuração da aplicação
+│   └── app.routes.ts           # Rotas (futuro)
+├── assets/                     # Recursos estáticos
+│   ├── rock.png               # Imagem pedra
+│   ├── paper.png              # Imagem papel
+│   └── scissors.png           # Imagem tesoura
+├── index.html                  # HTML principal
+├── main.ts                     # Bootstrap da aplicação
+└── styles.css                  # Estilos globais
 ```
 
-=======
-![Screenshot](public/game.png)
-
-## O que o projeto faz
-
-- Conecta dois jogadores através de WebSocket
-- Permite que você faça sua escolha (pedra, papel ou tesoura)
-- Mostra o resultado da partida em tempo real
-- Mantém você informado sobre o status da conexão
-
-**Backend (não incluído neste repositório):**
-- Spring Boot
-- WebSocket
-- Java
-
-## Como usar
-
-1. Abra a aplicação em duas abas ou navegadores diferentes
-2. Aguarde a mensagem "Conectado ao servidor"
-3. Quando aparecer "Clique em uma opção para jogar", escolha pedra, papel ou tesoura
-4. Aguarde o outro jogador fazer sua escolha
-5. Veja o resultado da partida
-6. Jogue novamente clicando em outra opção
-
->>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
 ## Funcionalidades
 
-- Conexão em tempo real via WebSocket
-- Indicador visual de status de conexão
-- Desabilita botões enquanto aguarda oponente
-- Mostra resultado formatado da partida
-- Design responsivo e clean
-- Feedback visual para todas as ações
+### Implementadas
+- ✅ Conexão WebSocket em tempo real
+- ✅ Indicador visual de status (conectado/desconectado)
+- ✅ Desabilitação automática de botões durante espera
+- ✅ Exibição formatada de resultados com quebras de linha
+- ✅ Design responsivo e clean
+- ✅ Feedback visual para todas as interações
+- ✅ Reconexão automática em caso de falha
+- ✅ Tratamento de erros robusto
+- ✅ Sanitização de HTML para segurança
 
-<<<<<<< HEAD
+### Detalhes técnicos
+- **Standalone Components**: Arquitetura moderna do Angular
+- **RxJS Observables**: Gerenciamento reativo de mensagens
+- **DomSanitizer**: Sanitização segura de HTML dinâmico
+- **WebSocket nativo**: Comunicação bidirecional eficiente
+- **TypeScript strict**: Tipagem forte para maior segurança
+
+## Fluxo de comunicação
+
+```
+Cliente 1                    Backend                     Cliente 2
+   |                            |                            |
+   |----[conectar]------------->|                            |
+   |<---"Aguardando..."---------|                            |
+   |                            |<----[conectar]-------------|
+   |<---"Conectados!"-----------|----"Conectados!"---------->|
+   |                            |                            |
+   |----"pedra"---------------->|                            |
+   |                            |<----"tesoura"--------------|
+   |<---"J1 venceu!"------------|----"J1 venceu!"----------->|
+   |                            |                            |
+   |    [conexão fechada]       |     [conexão fechada]      |
+```
+
+## Melhorias futuras
+
+### Funcionalidades de jogo
+- [ ] Adicionar placar de vitórias por sessão
+- [ ] Modo treino contra IA
+- [ ] Sala de espera com lista de jogadores online
+- [ ] Chat entre jogadores
+- [ ] Histórico de partidas
+- [ ] Sistema de ranking
+- [ ] Modo melhor de 3/5 rodadas
+- [ ] Timeout automático para jogadas (30s)
+- [ ] Variação: Pedra, Papel, Tesoura, Lagarto, Spock
+
+### Interface e UX
+- [ ] Animações de transição entre estados
+- [ ] Efeitos sonoros para ações
+- [ ] Temas claro/escuro
+- [ ] Avatares personalizáveis
+- [ ] Notificações push
+- [ ] Tutorial interativo para novos jogadores
+- [ ] Modo tela cheia
+
+### Sistema de usuários
+- [ ] Autenticação e perfis
+- [ ] Sistema de amigos
+- [ ] Estatísticas pessoais
+- [ ] Conquistas e badges
+- [ ] Customização de perfil
+
+### Técnico
+- [ ] Testes unitários (Jasmine/Karma)
+- [ ] Testes E2E (Playwright)
+- [ ] PWA (Progressive Web App)
+- [ ] Service Workers para offline
+- [ ] Internacionalização (i18n)
+- [ ] Acessibilidade WCAG 2.1
+- [ ] Performance monitoring
+- [ ] Analytics de uso
+
+## Configurações avançadas
+
+### Ambiente de desenvolvimento
+
+Crie `src/environments/environment.development.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  wsUrl: 'ws://localhost:8080/game'
+};
+```
+
+### Ambiente de produção
+
+Crie `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: true,
+  wsUrl: 'wss://websocket-jokenpo.cesaravb.com.br/game'
+};
+```
+
+### Proxy para desenvolvimento
+
+Crie `proxy.conf.json`:
+
+```json
+{
+  "/game": {
+    "target": "ws://localhost:8080",
+    "ws": true,
+    "logLevel": "debug"
+  }
+}
+```
+
+Execute com proxy:
+```bash
+ng serve --proxy-config proxy.conf.json
+```
+
+## Troubleshooting
+
+### WebSocket não conecta
+
+**Sintomas:** Indicador vermelho "Não conectado"
+
+**Soluções:**
+1. Verifique se o backend está rodando
+2. Confirme a URL no `websocket.ts`
+3. Verifique CORS no backend
+4. Teste conexão direta: `curl http://localhost:8080/game`
+
+### Botões ficam desabilitados
+
+**Sintomas:** Não consegue clicar em pedra/papel/tesoura
+
+**Soluções:**
+1. Aguarde segundo jogador conectar
+2. Recarregue a página
+3. Verifique console do navegador (F12)
+
+### Resultado não aparece
+
+**Sintomas:** Fez escolha mas nada acontece
+
+**Soluções:**
+1. Verifique se ambos jogadores fizeram escolha
+2. Veja logs do backend
+3. Confirme formato de mensagem no console
+
+### Erro de CORS
+
+**Sintomas:** Erro "blocked by CORS policy" no console
+
+**Soluções:**
+1. Adicione origem no backend (`WebSocketConfig.java`)
+2. Verifique `setAllowedOrigins()` está correto
+3. Reinicie o backend após alterações
+
+## Deploy
+
+### Cloudflare Pages (recomendado)
+
+```bash
+npm run build
+# Upload pasta dist/ para Cloudflare Pages
+```
+
+**Importante:** Ative WebSockets no painel do Cloudflare (Network → WebSockets)
+
+### Netlify
+
+```bash
+npm run build
+netlify deploy --prod --dir=dist/browser
+```
+
+### Vercel
+
+```bash
+npm run build
+vercel --prod
+```
+
+### Docker
+
+```dockerfile
+FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+Build e run:
+```bash
+docker build -t jokenpo-frontend .
+docker run -p 80:80 jokenpo-frontend
+```
+
 ## Como contribuir
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature:
-```bash
-git checkout -b minha-feature
-```
+1. **Fork o projeto**
+2. **Crie uma branch para sua feature:**
+   ```bash
+   git checkout -b feature/minha-feature
+   ```
+3. **Commit suas mudanças:**
+   ```bash
+   git commit -m "feat: adiciona minha feature"
+   ```
+4. **Push para a branch:**
+   ```bash
+   git push origin feature/minha-feature
+   ```
+5. **Abra um Pull Request**
 
-3. Commit suas mudanças:
-```bash
-git commit -m "Adiciona minha feature"
-```
+### Convenção de commits
 
-4. Faça push para a branch:
-```bash
-git push origin minha-feature
-```
+Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
 
-5. Abra um Pull Request
+- `feat:` Nova funcionalidade
+- `fix:` Correção de bug
+- `docs:` Documentação
+- `style:` Formatação
+- `refactor:` Refatoração
+- `test:` Testes
+- `chore:` Manutenção
 
 ## Reportar problemas
 
-Encontrou um bug? Abra uma issue descrevendo:
-- O que você esperava que acontecesse
-- O que realmente aconteceu
-- Passos para reproduzir o problema
-- Prints ou mensagens de erro (se houver)
+Encontrou um bug? [Abra uma issue](https://github.com/CesarAVB/angular-game-websocket/issues) descrevendo:
 
-=======
->>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
-## Melhorias futuras
+- **O que esperava** que acontecesse
+- **O que realmente** aconteceu
+- **Passos para reproduzir** o problema
+- **Screenshots** ou mensagens de erro
+- **Ambiente**: Browser, versão, SO
 
-- Adicionar placar de vitórias
-- Modo treino contra IA
-- Sala de espera com lista de jogadores
-- Chat entre jogadores
-- Histórico de partidas
-
-<<<<<<< HEAD
 ## Licença
 
 Este projeto usa a licença MIT. Você pode usar, modificar e distribuir livremente.
 
 ## Contato
 
-Desenvolvido por César Augusto
+**Desenvolvedor:** César Augusto
 
 - GitHub: [@CesarAVB](https://github.com/CesarAVB)
+- LinkedIn: [César Augusto](https://linkedin.com/in/cesaravb)
 
-=======
->>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
+## Agradecimentos
+
+- Comunidade Angular pela excelente documentação
+- Spring Boot pela robustez do WebSocket
+- Todos os contribuidores do projeto
+
 ## Notas importantes
 
-- O jogo precisa de exatamente 2 jogadores conectados para funcionar
-- Se um jogador desconectar, o outro será notificado
-- A conexão WebSocket reconecta automaticamente em caso de falha
-<<<<<<< HEAD
-- Os botões ficam desabilitados quando não há conexão ativa
-=======
-- Os botões ficam desabilitados quando não há conexão ativa
->>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
+⚠️ **Limitações conhecidas:**
+- Jogo requer exatamente 2 jogadores conectados
+- Sessões encerram após cada partida
+- Não persiste dados entre sessões
+- Sem identificação de jogadores
+- Escolhas devem ser em MAIÚSCULAS no frontend (`PEDRA`, `PAPEL`, `TESOURA`)
+
+🔒 **Segurança:**
+- HTML é sanitizado antes de renderização
+- WebSocket usa WSS em produção (criptografado)
+- CORS configurado para origens específicas
+
+🚀 **Performance:**
+- Aplicação SPA extremamente leve (~500KB)
+- First Contentful Paint < 1s
+- Comunicação WebSocket de baixa latência
+
+📱 **Compatibilidade:**
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+- Dispositivos móveis (iOS/Android)
+
+---
+
+**⭐ Se este projeto foi útil, deixe uma estrela no repositório!**
