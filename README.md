@@ -357,61 +357,9 @@ docker build -t jokenpo-frontend .
 docker run -p 80:80 jokenpo-frontend
 ```
 
-## Como contribuir
-
-1. **Fork o projeto**
-2. **Crie uma branch para sua feature:**
-   ```bash
-   git checkout -b feature/minha-feature
-   ```
-3. **Commit suas mudanças:**
-   ```bash
-   git commit -m "feat: adiciona minha feature"
-   ```
-4. **Push para a branch:**
-   ```bash
-   git push origin feature/minha-feature
-   ```
-5. **Abra um Pull Request**
-
-### Convenção de commits
-
-Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Documentação
-- `style:` Formatação
-- `refactor:` Refatoração
-- `test:` Testes
-- `chore:` Manutenção
-
-## Reportar problemas
-
-Encontrou um bug? [Abra uma issue](https://github.com/CesarAVB/angular-game-websocket/issues) descrevendo:
-
-- **O que esperava** que acontecesse
-- **O que realmente** aconteceu
-- **Passos para reproduzir** o problema
-- **Screenshots** ou mensagens de erro
-- **Ambiente**: Browser, versão, SO
-
 ## Licença
 
 Este projeto usa a licença MIT. Você pode usar, modificar e distribuir livremente.
-
-## Contato
-
-**Desenvolvedor:** César Augusto
-
-- GitHub: [@CesarAVB](https://github.com/CesarAVB)
-- LinkedIn: [César Augusto](https://linkedin.com/in/cesaravb)
-
-## Agradecimentos
-
-- Comunidade Angular pela excelente documentação
-- Spring Boot pela robustez do WebSocket
-- Todos os contribuidores do projeto
 
 ## Notas importantes
 
@@ -427,18 +375,3 @@ Este projeto usa a licença MIT. Você pode usar, modificar e distribuir livreme
 - WebSocket usa WSS em produção (criptografado)
 - CORS configurado para origens específicas
 
-🚀 **Performance:**
-- Aplicação SPA extremamente leve (~500KB)
-- First Contentful Paint < 1s
-- Comunicação WebSocket de baixa latência
-
-📱 **Compatibilidade:**
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-- Dispositivos móveis (iOS/Android)
-
----
-
-**⭐ Se este projeto foi útil, deixe uma estrela no repositório!**
