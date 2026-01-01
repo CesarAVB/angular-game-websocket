@@ -2,6 +2,7 @@
 
 Um jogo multiplayer de Pedra, Papel e Tesoura em tempo real. Você joga contra outro jogador conectado ao mesmo tempo.
 
+<<<<<<< HEAD
 ## O que o projeto faz
 
 - Conecta dois jogadores através de WebSocket
@@ -105,6 +106,31 @@ src/
 └── styles.css          # Estilos globais
 ```
 
+=======
+![Screenshot](public/game.png)
+
+## O que o projeto faz
+
+- Conecta dois jogadores através de WebSocket
+- Permite que você faça sua escolha (pedra, papel ou tesoura)
+- Mostra o resultado da partida em tempo real
+- Mantém você informado sobre o status da conexão
+
+**Backend (não incluído neste repositório):**
+- Spring Boot
+- WebSocket
+- Java
+
+## Como usar
+
+1. Abra a aplicação em duas abas ou navegadores diferentes
+2. Aguarde a mensagem "Conectado ao servidor"
+3. Quando aparecer "Clique em uma opção para jogar", escolha pedra, papel ou tesoura
+4. Aguarde o outro jogador fazer sua escolha
+5. Veja o resultado da partida
+6. Jogue novamente clicando em outra opção
+
+>>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
 ## Funcionalidades
 
 - Conexão em tempo real via WebSocket
@@ -114,6 +140,7 @@ src/
 - Design responsivo e clean
 - Feedback visual para todas as ações
 
+<<<<<<< HEAD
 ## Como contribuir
 
 1. Faça um fork do projeto
@@ -142,6 +169,8 @@ Encontrou um bug? Abra uma issue descrevendo:
 - Passos para reproduzir o problema
 - Prints ou mensagens de erro (se houver)
 
+=======
+>>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
 ## Melhorias futuras
 
 - Adicionar placar de vitórias
@@ -150,6 +179,7 @@ Encontrou um bug? Abra uma issue descrevendo:
 - Chat entre jogadores
 - Histórico de partidas
 
+<<<<<<< HEAD
 ## Licença
 
 Este projeto usa a licença MIT. Você pode usar, modificar e distribuir livremente.
@@ -160,9 +190,15 @@ Desenvolvido por César Augusto
 
 - GitHub: [@CesarAVB](https://github.com/CesarAVB)
 
+=======
+>>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
 ## Notas importantes
 
 - O jogo precisa de exatamente 2 jogadores conectados para funcionar
 - Se um jogador desconectar, o outro será notificado
 - A conexão WebSocket reconecta automaticamente em caso de falha
+<<<<<<< HEAD
 - Os botões ficam desabilitados quando não há conexão ativa
+=======
+- Os botões ficam desabilitados quando não há conexão ativa
+>>>>>>> 5a846c7a9a8633a53204140d9c04eb7b625d2a9d
